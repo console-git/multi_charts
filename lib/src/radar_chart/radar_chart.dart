@@ -50,6 +50,9 @@ class RadarChart extends StatefulWidget {
   /// Data points of the graph
   final List<double> values;
 
+  /// textstyle for label
+  final TextStyle labelTextStyle;
+
   /// Provides naming for the data points
   ///
   /// If not provided, it will default to the value of data points.
@@ -81,7 +84,7 @@ class RadarChart extends StatefulWidget {
   /// Defines the color of the chart labels
   ///
   /// Defaults to [Colors.black]
-  final Color labelColor;
+  // final Color labelColor;
 
   /// Defines the maximum width of the chart
   ///
@@ -98,7 +101,7 @@ class RadarChart extends StatefulWidget {
   /// the factor by which the label's textSize increases with
   /// respect to the average of width and height of the enclosing parent widget,
   /// if not provided defaults to `0.04`.
-  final double textScaleFactor;
+  // final double textScaleFactor;
 
   /// Defines the maximum width of the labels
   ///
@@ -158,24 +161,26 @@ class RadarChart extends StatefulWidget {
   ///   chartRadiusFactor: 0.7,
   /// )
   /// ```
-  RadarChart(
-      {Key? key,
-      required this.values,
-      this.labels,
-      required this.maxValue,
-      this.size = Size.infinite,
-      this.fillColor = Colors.black26,
-      this.strokeColor = Colors.black87,
-      this.labelColor = Colors.black,
-      this.maxWidth = 200,
-      this.maxHeight = 200,
-      this.textScaleFactor = 0.04,
-      this.labelWidth,
-      this.maxLinesForLabels,
-      this.animate = true,
-      this.animationDuration = const Duration(milliseconds: 1500),
-      this.curve = Curves.easeIn,
-      this.chartRadiusFactor = 0.8});
+  RadarChart({
+    Key? key,
+    required this.values,
+    this.labels,
+    required this.maxValue,
+    this.size = Size.infinite,
+    this.fillColor = Colors.black26,
+    this.strokeColor = Colors.black87,
+    // this.labelColor = Colors.black,
+    this.maxWidth = 200,
+    this.maxHeight = 200,
+    // this.textScaleFactor = 0.04,
+    this.labelWidth,
+    this.maxLinesForLabels,
+    this.animate = true,
+    this.animationDuration = const Duration(milliseconds: 1500),
+    this.curve = Curves.easeIn,
+    this.chartRadiusFactor = 0.8,
+    required this.labelTextStyle,
+  });
 
   @override
   _RadarChartState createState() => _RadarChartState();
@@ -278,18 +283,20 @@ class _RadarChartState extends State<RadarChart> with TickerProviderStateMixin {
         padding: const EdgeInsets.all(8.0),
         child: CustomPaint(
           painter: RadarChartPainter(
-              widget.values,
-              widget.labels,
-              widget.maxValue,
-              widget.fillColor,
-              widget.strokeColor,
-              widget.labelColor,
-              widget.textScaleFactor,
-              widget.labelWidth,
-              widget.maxLinesForLabels,
-              widget.animate ? dataAnimationPercent : 1.0,
-              widget.animate ? outlineAnimationPercent : 1.0,
-              widget.chartRadiusFactor),
+            widget.values,
+            widget.labels,
+            widget.maxValue,
+            widget.fillColor,
+            widget.strokeColor,
+            // widget.labelColor,
+            // widget.textScaleFactor,
+            widget.labelWidth,
+            widget.maxLinesForLabels,
+            widget.animate ? dataAnimationPercent : 1.0,
+            widget.animate ? outlineAnimationPercent : 1.0,
+            widget.chartRadiusFactor,
+            widget.labelTextStyle,
+          ),
           size: widget.size,
         ),
       ),

@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
               maxValue: 10,
               fillColor: Colors.blue,
               chartRadiusFactor: 0.7,
+              labelTextStyle: TextStyle(),
             ),
           ),
           //Pie Chart

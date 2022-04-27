@@ -8,19 +8,22 @@ import 'package:multi_charts/src/common/common_paint_utils.dart';
 class RadarChartDrawUtils {
   /// Draws the labels at the given offset positions at the outside of the graph.
   static void drawLabels(
-      Canvas canvas,
-      Offset center,
-      List<String> labels,
-      List<Offset> labelPoints,
-      double textSize,
-      double labelWidth,
-      int maxLinesForLabels,
-      Color labelColor) {
+    Canvas canvas,
+    Offset center,
+    List<String> labels,
+    List<Offset> labelPoints,
+    // double textSize,
+    double labelWidth,
+    int maxLinesForLabels,
+    // Color labelColor,
+    TextStyle labelTextStyle,
+  ) {
     var textPainter = TextPainter(textDirection: TextDirection.ltr);
     for (var i = 0; i < labelPoints.length; i++) {
       textPainter.text = TextSpan(
-          text: labels[i],
-          style: TextStyle(color: labelColor, fontSize: textSize));
+        text: labels[i], style: labelTextStyle,
+        // style: TextStyle(color: labelColor, fontSize: textSize),
+      );
       textPainter.maxLines = maxLinesForLabels;
       textPainter.textAlign = TextAlign.center;
 

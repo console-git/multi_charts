@@ -17,27 +17,30 @@ class RadarChartPainter extends CustomPainter {
   final double maxValue;
   final Color fillColor;
   final Color strokeColor;
-  final Color labelColor;
-  final double textScaleFactor;
+  // final Color labelColor;
+  // final double textScaleFactor;
   final double? labelWidth;
   final int? maxLinesForLabels;
   final double dataAnimationPercent;
   final double outlineAnimationPercent;
   final double chartRadiusFactor;
+  final TextStyle labelTextStyle;
 
   RadarChartPainter(
-      this.values,
-      this.labels,
-      this.maxValue,
-      this.fillColor,
-      this.strokeColor,
-      this.labelColor,
-      this.textScaleFactor,
-      this.labelWidth,
-      this.maxLinesForLabels,
-      this.dataAnimationPercent,
-      this.outlineAnimationPercent,
-      this.chartRadiusFactor);
+    this.values,
+    this.labels,
+    this.maxValue,
+    this.fillColor,
+    this.strokeColor,
+    // this.labelColor,
+    // this.textScaleFactor,
+    this.labelWidth,
+    this.maxLinesForLabels,
+    this.dataAnimationPercent,
+    this.outlineAnimationPercent,
+    this.chartRadiusFactor,
+    this.labelTextStyle,
+  );
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -62,17 +65,19 @@ class RadarChartPainter extends CustomPainter {
         values.length,
         outlineAnimationPercent,
         (min(center.dx, center.dy) * chartRadiusFactor));
-    RadarChartDrawUtils.drawGraphData(canvas, valuePoints, fillColor, strokeColor);
+    RadarChartDrawUtils.drawGraphData(
+        canvas, valuePoints, fillColor, strokeColor);
     RadarChartDrawUtils.drawLabels(
-        canvas,
-        center,
-        labels ?? values.map((v) => v.toString()).toList(),
-        outerPoints,
-        CommonPaintUtils.getTextSize(size, textScaleFactor),
-        labelWidth ??
-            CommonPaintUtils.getDefaultLabelWidth(size, center, angle),
-        maxLinesForLabels ?? CommonPaintUtils.getDefaultMaxLinesForLabels(size),
-        labelColor);
+      canvas,
+      center,
+      labels ?? values.map((v) => v.toString()).toList(),
+      outerPoints,
+      // CommonPaintUtils.getTextSize(size, textScaleFactor),
+      labelWidth ?? CommonPaintUtils.getDefaultLabelWidth(size, center, angle),
+      maxLinesForLabels ?? CommonPaintUtils.getDefaultMaxLinesForLabels(size),
+      // labelColor,
+      labelTextStyle,
+    );
   }
 
   @override
